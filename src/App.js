@@ -1,23 +1,23 @@
-import logo from './logo.svg';
-import './App.css';
+import { useState } from "react";
+import { GuestPage } from "./guests/containers/GuestPage";
+import { OrdersPage } from "./orders/containers/OrdersPage";
 
 function App() {
+  const [isSignedIn, setIsSignedIn] = useState(false);
+
+
+  function handleSignIn() {
+    setIsSignedIn(true);
+  }
+
+  function handleSignOut() {
+    setIsSignedIn(false)
+  }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      {!isSignedIn && <GuestPage onSignIn={handleSignIn} />}
+      {isSignedIn && <OrdersPage onSignOut={handleSignOut} />}
     </div>
   );
 }
